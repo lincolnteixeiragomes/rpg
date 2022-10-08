@@ -13,6 +13,7 @@
     "nodemon": "^2.0.19",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
+    "pm2": "^5.2.0",
     "sequelize": "^6.21.4"
   },
   "name": "rpg",
@@ -23,11 +24,19 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Store items control for RPG",
   "devDependencies": {
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-html": "^7.1.0",
     "eslint-plugin-import": "^2.26.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lincolnteixeiragomes/rpg.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lincolnteixeiragomes/rpg/issues"
+  },
+  "homepage": "https://github.com/lincolnteixeiragomes/rpg#readme"
 }
