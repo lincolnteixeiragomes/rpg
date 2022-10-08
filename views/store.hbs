@@ -1,0 +1,42 @@
+
+<form action="/store" method="GET">
+  <input type="text" name="hash" placeholder="Insert the Store HASH to find a store" class="form-control">
+  <div class="d-grid gap-2 col-3 mx-auto mt-3">
+    <button class="btn btn-primary" type="submit">Search</button>
+  </div>
+</form>
+  {{#if store}}
+  <br>
+  <div class="container text-center">
+    <div class="row justify-content-md-center">
+      <h3>{{store.name}}</h3>
+      <div class="col-md-5">
+        <div class="input-group">
+          <span class="input-group-text">HASH:</span>
+          <input type="text" class="form-control text-center" name="hash" value="{{store.hash}}" disabled>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Category</th>
+        <th scope="col">Rarity</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each store.items}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{price}}</td>
+        <td>{{category.name}}</td>
+        <td>{{rarity.name}}</td>
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
+{{/if}}

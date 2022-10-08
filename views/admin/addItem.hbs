@@ -1,0 +1,38 @@
+{{#each errors}}
+  <div class="alert alert-danger">{{warnings}}</div>
+{{/each}}
+<h2>Create Item</h2>
+<hr>
+<form action="/admin/item/add" method="POST">
+  <div class="card">
+    <div class="card-body">
+      <label class="col-form-label">Name:</label>
+      <input type="text" class="form-control" id="name" name="name"/>
+      <label class="col-form-label">Price:</label>
+      <div class="input-group">
+        <input type="number" class="form-control" id="price" name="priceForm">
+        &nbsp;
+        <select class="selectpicker" data-width="fit" name="coin">
+          <option class="small" value="1">CP</option>
+          <option class="small" value="10">PP</option>
+          <option class="small" value="100" selected>GP</option>
+        </select>
+      </div>
+      <label class="col-form-label">Category:</label>
+      <select class="form-select" name="categoryId">
+        <option selected>Select category</option>
+        {{#each categories}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+      <label for="name" class="col-form-label">Rarity:</label>
+      <select class="form-select" name="rarityId">
+        <option selected>Select Rarity</option>
+        {{#each rarities}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+      <button type="submit" class="btn btn-success mt-4">Register</button>
+    </div>
+  </div>
+</form>

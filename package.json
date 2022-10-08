@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "bootstrap-select": "^1.13.18",
+    "connect-flash": "^0.1.1",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "handlebars-paginate": "^0.1.0",
+    "nodemon": "^2.0.19",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.21.4"
+  },
+  "name": "rpg",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-html": "^7.1.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}

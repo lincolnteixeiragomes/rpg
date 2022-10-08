@@ -1,0 +1,30 @@
+{{#each errors}}
+  <div class="alert alert-danger">{{warnings}}</div>
+{{/each}}
+
+<h2>Edit User</h2>
+<hr>
+<form action="/admin/user/edit" method="POST">
+  <div class="card">
+    <div class="card-body">
+      <input type="hidden" name="id" value="{{user.id}}"/>
+      <label class="col-form-label">Name:</label>
+      <input type="text" class="form-control" id="name" name="name" value="{{user.name}}" />
+      <label class="col-form-label">Nickname:</label>
+      <input type="text" class="form-control" id="nickname" name="nickname" value="{{user.nickname}}"/>
+      <label class="col-form-label">E-mail:</label>
+      <input type="text" class="form-control" id="email" name="email" value="{{user.email}}"/>
+      <label class="col-form-label">Password:</label>
+      <input type="password" class="form-control" id="password" name="password"/>
+      <label class="col-form-label">Repeate Password:</label>
+      <input type="password" class="form-control" id="password2" name="password2"/>
+      <label class="col-form-label">Role:</label>
+      <select class="form-select" name="role">
+        <option value="0" {{#ifCond 0 user.role}}selected{{/ifCond}}>Admin</option>
+        <option value="1" {{#ifCond 1 user.role}}selected{{/ifCond}}>Master</option>
+        <option value="2" {{#ifCond 2 user.role}}selected{{/ifCond}}>Player</option>
+      </select>
+      <button type="submit" class="btn btn-success mt-4">Update</button>
+    </div>
+  </div>
+</form>

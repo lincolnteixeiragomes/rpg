@@ -1,0 +1,133 @@
+
+<div class="d-flex justify-content-between">
+  <h2>List of Users:</h2>
+  <a href="/admin/user/add" ><button class="btn btn-success">Create New</button></a>
+</div>
+<hr>
+
+<form action="/admin/user/filter" method="GET">
+  <div class="container text-center">
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <div class="input-group">
+          <span class="input-group-text">Name:</span>
+          <input type="text" class="form-control" name="name" value={{name}}>
+        </div>
+      </div>
+      <div class="col-md-auto">
+        <div class="input-group">
+          <span class="input-group-text">Nickname:</span>
+          <input type="text" class="form-control" name="nickname" value={{nickname}}>
+        </div>
+      </div>
+      <div class="col-md-auto">
+        <div class="input-group">
+          <span class="input-group-text">E-mail:</span>
+          <input type="text" class="form-control" name="email" value={{email}}>
+        </div>
+      </div>
+      <div class="col-md-auto">
+        <select class="form-select" name="role">
+          <option value="99" {{#ifCond 0 role}}selected{{/ifCond}}>Role</option>
+          <option value="0" {{#ifCond 0 role}}selected{{/ifCond}}>Admin</option>
+          <option value="1" {{#ifCond 1 role}}selected{{/ifCond}}>Master</option>
+          <option value="2" {{#ifCond 2 role}}selected{{/ifCond}}>Player</option>
+        </select>
+      </div>
+      <div class="col-md-auto">
+        <div class="input-group ">
+          <button type="submit" class="btn btn-outline-primary">Filter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<hr>
+{{#if users}}
+  <form action="/admin/user/delete" method="POST">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Nickname</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Role</th>
+          <th scope="col">Last Access</th>
+          <th scope="col" class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {{#each users}}
+        <tr>
+          <th scope="row"><input class="form-check-input" type="checkbox" value="{{id}}" id="checkbox" name="checkbox"></th>
+          <td>{{name}}</td>
+          <td>{{nickname}}</td>
+          <td>{{email}}</td>
+          <td>
+            {{#ifCond 0 role}}Admin{{/ifCond}}
+            {{#ifCond 1 role}}Master{{/ifCond}}
+            {{#ifCond 2 role}}Player{{/ifCond}}
+          </td>
+          <td>{{lastAccess}}</td>
+          <td class="text-center">
+            <a href="/admin/user/edit/{{id}}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+               <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+              </svg>
+            </a>
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+
+    {{#ifCond 1 numberOfPages}}
+    {{else}}
+      <div>
+        <ul class="pagination justify-content-center">
+          {{#paginate ../pagination type="first"}}
+            <li {{#if ../disabled}}class="disabled page-item"{{/if}}><a class="page-link" href="?name={{../../name}}&nickname={{../../nickname}}&email={{../../email}}&role={{../../role}}&p={{n}}&s={{../../resultsPerPage}}">First</a></li>
+          {{/paginate}}
+          {{#paginate ../pagination type="previous"}}
+            <li {{#if ../disabled}}class="disabled page-item"{{/if}}><a class="page-link" href="?name={{../../name}}&nickname={{../../nickname}}&email={{../../email}}&role={{../../role}}&p={{n}}&s={{../../resultsPerPage}}">Prev</a></li>
+          {{/paginate}}
+          {{#paginate ../pagination type="middle" limit="7"}}
+            <li {{#if ../active}}class="active page-item"{{/if}}><a class="page-link" href="?name={{../../name}}&nickname={{../../nickname}}&email={{../../email}}&role={{../../role}}&p={{n}}&s={{../../resultsPerPage}}">{{n}}</a></li>
+          {{/paginate}}
+          {{#paginate ../pagination type="next"}}
+            <li {{#if ../disabled}}class="disabled page-item"{{/if}}><a class="page-link" href="?name={{../../name}}&nickname={{../../nickname}}&email={{../../email}}&role={{../../role}}&p={{n}}&s={{../../resultsPerPage}}">Next</a></li>
+          {{/paginate}}
+          {{#paginate ../pagination type="last"}}
+            <li {{#if ../disabled}}class="disabled page-item"{{/if}}><a class="page-link" href="?name={{../../name}}&nickname={{../../nickname}}&email={{../../email}}&role={{../../role}}&p={{n}}&s={{../../resultsPerPage}}">Last</a></li>
+          {{/paginate}}
+        </ul>
+      </div>
+      <hr>
+    {{/ifCond}}
+
+
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Delete</button>
+    <!-- modal for delete confirmation -->
+    <div class="modal" tabindex="-1" id="deleteConfirmation">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Deletion confirmation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-danger">i'm ready to Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{{else}}
+  <p>Don't have any user registered!</p>
+{{/if}}
+

@@ -1,0 +1,29 @@
+{{#each errors}}
+  <div class="alert alert-danger">{{warnings}}</div>
+{{/each}}
+
+<h2>Create User</h2>
+<hr>
+<form action="/admin/user/add" method="POST">
+  <div class="card">
+    <div class="card-body">
+      <label class="col-form-label">Name:</label>
+      <input type="text" class="form-control" id="name" name="name"/>
+      <label class="col-form-label">Nickname:</label>
+      <input type="text" class="form-control" id="nickname" name="nickname"/>
+      <label class="col-form-label">E-mail:</label>
+      <input type="text" class="form-control" id="email" name="email"/>
+      <label class="col-form-label">Password:</label>
+      <input type="password" class="form-control" id="password" name="password"/>
+      <label class="col-form-label">Repeate Password:</label>
+      <input type="password" class="form-control" id="password2" name="password2"/>
+      <label class="col-form-label">Role:</label>
+      <select class="form-select" name="role">
+        <option value="0">Admin</option>
+        <option value="1">Master</option>
+        <option value="2" selected>Player</option>
+      </select>
+      <button type="submit" class="btn btn-success mt-4">Register</button>
+    </div>
+  </div>
+</form>

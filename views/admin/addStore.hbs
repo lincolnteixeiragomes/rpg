@@ -1,0 +1,100 @@
+<h2>Store Generator</h2>
+<hr>
+<form action="/admin/store/generator" method="POST">
+  <div class="container text-center">
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <div class="input-group">
+          <span class="input-group-text">Store name:</span>
+          <input type="text" class="form-control" name="name">
+        </div>
+      </div>
+      <div class="col-md-auto">
+        <div class="input-group">
+          <span class="input-group-text">Price Range:</span>
+          <input type="number" class="form-control" name="priceMin" placeholder="Min">
+            &nbsp;
+            <select class="selectpicker" data-width="fit" name="coinMin">
+              <option class="small" value="1">CP</option>
+              <option class="small" value="10">PP</option>
+              <option class="small" value="100" selected>GP</option>
+            </select>
+            &nbsp;
+          <input type="number" class="form-control" name="priceMax" placeholder="Max">
+            &nbsp;
+            <select class="selectpicker" data-width="fit"  name="coinMax">
+              <option class="small" value="1">CP</option>
+              <option class="small" value="10">PP</option>
+              <option class="small" value="100" selected>GP</option>
+            </select>
+        </div>
+      </div>
+      <div class="col-md-auto">
+          <input type="number" class="form-control" name="size" placeholder="Store size">
+      </div>
+    </div>
+    <br>
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <select class="selectpicker" multiple data-actions-box="true" data-selected-text-format="count" name="searchCategories">
+          {{#each categories}}
+            <option value="{{id}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="col-md-auto">
+        <select class="selectpicker" multiple data-actions-box="true" data-selected-text-format="count" name="searchRarities">
+          {{#each rarities}}
+          <option value="{{id}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+    <br>
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <div class="input-group ">
+          <button type="submit" class="btn btn-outline-primary">GENERATE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<hr>
+{{#if items}}
+  <br>
+  <div class="container text-center">
+    <div class="row justify-content-md-center">
+      <h3>{{name}}</h3>
+      <div class="col-md-5">
+        <div class="input-group">
+          <span class="input-group-text">HASH:</span>
+          <input type="text" class="form-control text-center" name="hash" value="{{hash}}" disabled>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Category</th>
+        <th scope="col">Rarity</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each items}}
+      <tr>
+        <th scope="row"><input class="form-check-input" type="checkbox" value="{{id}}" id="checkbox" name="checkbox"></th>
+        <td>{{name}}</td>
+        <td>{{price}}</td>
+        <td>{{category.name}}</td>
+        <td>{{rarity.name}}</td>
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
+{{/if}}

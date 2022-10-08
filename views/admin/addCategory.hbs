@@ -1,0 +1,19 @@
+{{#each errors}}
+  <div class="alert alert-danger">{{warnings}}</div>
+{{/each}}
+
+<h2>Create Category</h2>
+<hr>
+<form action="/admin/category/add" method="POST">
+  <div class="card">
+    <div class="card-body">
+      <label class="col-form-label">Name:</label>
+      <input type="text" class="form-control" id="name" name="name"/>
+      <label class="col-form-label">Slug:</label>
+      <input type="text" class="form-control" id="slug" name="slug"/>
+      <label class="col-sm-1 col-form-label">Description:</label>
+      <textarea class="form-control" placeholder="Leave a description here" id="description" name="description" style="height: 100px"></textarea>
+      <button type="submit" class="btn btn-success mt-4">Register</button>
+    </div>
+  </div>
+</form>

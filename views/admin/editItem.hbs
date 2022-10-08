@@ -1,0 +1,38 @@
+{{#each errors}}
+  <div class="alert alert-danger">{{warnings}}</div>
+{{/each}}
+
+<h2>Update Item</h2>
+<hr>
+<form action="/admin/item/edit" method="POST">
+  <div class="card">
+    <div class="card-body">
+      <input type="hidden" name="id" value="{{item.id}}"/>
+      <label class="col-form-label">Name:</label>
+      <input type="text" class="form-control" name="name" value="{{item.name}}"/>
+      <label class="col-form-label">Price:</label>
+      <div class="input-group">
+        <input type="number" class="form-control" name="price" value="{{item.price}}">
+         &nbsp;
+        <select class="selectpicker"data-width="fit"  name="coin">
+          <option class="small" value="1" selected>CP</option>
+          <option class="small" value="10">PP</option>
+          <option class="small" value="100">GP</option>
+        </select>
+      </div>
+      <label class="col-form-label">Category:</label>
+      <select class="form-select" name="categoryId">
+        {{#each categories}}
+          <option value="{{id}}" {{#ifCond id ../item.categoryId}}selected{{/ifCond}}>{{name}}</option>
+        {{/each}}
+      </select>
+      <label class="col-form-label">Rarity:</label>
+      <select class="form-select" name="rarityId">
+        {{#each rarities}}
+          <option value="{{id}}" {{#ifCond id ../item.rarityId}}selected{{/ifCond}}>{{name}}</option>
+        {{/each}}
+      </select>
+      <button type="submit" class="btn btn-success mt-4">Update</button>
+    </div>
+  </div>
+</form>
