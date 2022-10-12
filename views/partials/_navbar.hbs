@@ -6,24 +6,32 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/store">Store</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Administration
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/admin/category">Category</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/admin/rarity">Rarity</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/admin/item">Item</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/admin/user">User</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/admin/store">Store Generator</a></li>
-          </ul>
-        </li>
-        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/login">Login</a></li>
+        {{#if user}}
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="/store">Store</a></li>
+        {{/if}}
+        {{#ifCond user.role 0}}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Administration
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/admin/category">Category</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/admin/rarity">Rarity</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/admin/item">Item</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/admin/user">User</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/admin/store">Store Generator</a></li>
+            </ul>
+          </li>
+        {{/ifCond}}
+        {{#if user}}
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="/logout">Logout</a></li>
+        {{else}}
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="/login">Login</a></li>
+        {{/if}}
       </ul>
     </div>
   </div>

@@ -1,3 +1,4 @@
+const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const { Sequelize } = require('../config/db');
 
@@ -180,5 +181,27 @@ exports.userFilterGet = (req, res) => {
   }).catch((err) => {
     req.flash('error_msg', `Something goes wrong: ${err.message}`);
     res.redirect('/admin/user');
+  });
+};
+
+// Login
+exports.login = (req, res) => {
+  res.render('login');
+};
+
+exports.loginPost = (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true,
+  })(req, res, next);
+};
+
+exports.logout = (req, res, next) => {
+  // eslint-disable-next-line consistent-return
+  req.logout((err) => {
+    if (err) { return next(err); }
+    req.flash('success_msg', 'successfully logged out');
+    res.redirect('/');
   });
 };
