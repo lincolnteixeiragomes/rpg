@@ -25,10 +25,6 @@ exports.userCreatePost = (req, res) => {
   if (password !== password2) errors.push({ warnings: 'Password not match' });
   if (name.length < 2) errors.push({ warnings: 'Name of user to small' });
 
-  // to valid password
-  // const result = bcrypt.compareSync('my password', hash)
-  // result == true or result == false
-
   if (errors.length > 0) {
     res.render('admin/addUser', { errors });
   } else {
@@ -204,4 +200,59 @@ exports.logout = (req, res, next) => {
     req.flash('success_msg', 'successfully logged out');
     res.redirect('/');
   });
+};
+
+// Display user create form on GET
+exports.userRegisterGet = (req, res) => {
+  res.render('register');
+};
+
+exports.userRegisterPost = (req, res) => {
+  const {
+    name, nickname, email, password, password2,
+  } = req.body;
+  const role = 2; // Player role
+  const errors = [];
+  if (!name) errors.push({ warnings: 'Invalid name' });
+  if (password !== password2) errors.push({ warnings: 'Password not match' });
+  if (name.length < 2) errors.push({ warnings: 'Name of user to small' });
+
+  if (errors.length > 0) {
+    res.render('register', { errors });
+  } else {
+    bcrypt.genSalt(10, (err, salt) => {
+      if (err) {
+        req.flash('error_msg', `Something goes wrong ${err.message}`);
+        res.redirect('/register');
+      }
+      bcrypt.hash(password, salt, (err2, hash) => {
+        if (err) {
+          req.flash('error_msg', `Something goes wrong ${err2.message}`);
+          res.redirect('/register');
+        }
+        User.findOne({
+          where:
+            { [Op.or]: [{ nickname }, { email }] },
+        }).then((user) => {
+          if (!user) {
+            User.create({
+              name, nickname, email, hash, role,
+            }).then(() => {
+              req.flash('success_msg', 'User registered succefully!');
+              res.redirect('/');
+            }).catch((err3) => {
+              req.flash('error_msg', `Something goes wrong, try again!.${err3.message}`);
+              res.redirect('/register');
+            });
+          } else {
+            req.flash('error_msg', 'Nickname/E-mail already exists!');
+            res.redirect('/register');
+          }
+        }).catch((err4) => {
+          req.flash('error_msg', `Something goes wrong, try again!.${err4.message}`);
+          res.redirect('/register');
+        });
+      });
+    });
+  }
 };

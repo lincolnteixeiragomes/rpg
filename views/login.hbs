@@ -1,8 +1,16 @@
+
+<div class="row justify-content-md-center">
+  <div class="custom-image-cropper">
+    <img src="img/credential.webp" alt="me" class="custom-img">
+  </div>
+</div>
 <form action="/login" method="POST">
   <div class="d-flex justify-content-center">
     <div class="card" style="width: 25rem;">
       <div class="card-body">
-        <h2>Login</h2>
+      <div class="d-flex justify-content-center mt-1">
+        <h2 class="custom-font-login">Sign in to continue</h2>
+      </div>
         <hr>
         <div class="d-grid gap-2 mx-auto">
           <div class="form-floating">
@@ -14,10 +22,18 @@
               <label for="floatingInputPassword">Password</label>
           </div>
           <div class="d-grid col-6 mx-auto">
-            <button class="btn btn-primary btn-lg">Login</button>
+            <button class="btn btn-primary btn-lg custom-btn-login">Sign in</button>
+          </div>
+          <div class="d-flex justify-content-center mt-1">
+            <p><a href="#" class="custom-txt-link">Forgot your password?</a></p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </form>
+<div class="d-flex justify-content-center mt-4">
+  <div>
+    <p>Not a member yet? <a href="/register" class="custom-txt-link">Register now</a></p>
+  </div>
+</div>

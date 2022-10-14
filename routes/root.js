@@ -11,5 +11,7 @@ router.get('/store', storeController.storeFind);
 router.get('/login', userController.login);
 router.post('/login', userController.loginPost);
 router.get('/logout', userController.logout);
+router.get('/register', userController.userRegisterGet);
+router.post('/register', userController.userRegisterPost);
 
 module.exports = router;

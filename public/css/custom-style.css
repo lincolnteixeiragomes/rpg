@@ -11,9 +11,37 @@
   border-radius: 50%;
 }
 
+.custom-image {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
 .custom-img {
   display: inline;
   margin: 0 -12px;
   height: 100%;
   width: auto;
+}
+
+.custom-font-login {
+  font-family: 'Lobster', cursive;
+  color: #007992;
+}
+
+.custom-btn-register {
+  background-color: #007992;
+  border-radius: 1.5rem;
+}
+
+.custom-btn-login {
+  border-radius: 1.5rem;
+  font-family: 'Lobster', cursive;
+  background-color: #007992;
+}
+
+.custom-txt-link {
+  text-decoration: none;
+  font-size: 16px;
 }
