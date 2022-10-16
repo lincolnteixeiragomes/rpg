@@ -1,29 +1,34 @@
-
-<div class="row justify-content-md-center">
-  <div class="custom-image-cropper">
-    <img src="img/credential.webp" alt="me" class="custom-img">
+<div class="row">
+  <div class="col justify-content-md-center custom-verticalLine">
+    <div class="custom-image">
+      <img src="img/credential.webp" alt="me" class="custom-img">
+    </div>
   </div>
-</div>
-<form action="/login" method="POST">
-  <div class="d-flex justify-content-center">
-    <div class="card" style="width: 25rem;">
+
+  <div class="col justify-content-center">
+    <div class="card custom-no-border">
       <div class="card-body">
-      <div class="d-flex justify-content-center mt-1">
-        <h2 class="custom-font-login">Sign in to continue</h2>
-      </div>
+        <div class="d-flex justify-content-center mt-1">
+          <h2 class="custom-font-login">Sign in to continue</h2>
+        </div>
+        <div class="d-flex justify-content-center mt-1">
+          <p>Not a member yet? <a href="/register" class="custom-txt-link">Register now</a></p>
+        </div>
         <hr>
         <div class="d-grid gap-2 mx-auto">
-          <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInputGrid" name="email">
-            <label for="floatingInputGrid">Email address</label>
-          </div>
-          <div class="form-floating">
-              <input type="password" class="form-control" id="floatingInputPassword" name="password">
+          <form action="/login" method="POST">
+            <div class="form-floating">
+              <input type="email" class="form-control mt-2" id="floatingInputGrid" name="email">
+              <label for="floatingInputGrid">Email address</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control mt-2" id="floatingInputPassword" name="password">
               <label for="floatingInputPassword">Password</label>
-          </div>
-          <div class="d-grid col-6 mx-auto">
-            <button class="btn btn-primary btn-lg custom-btn-login">Sign in</button>
-          </div>
+            </div>
+            <div class="d-grid col-6 mx-auto">
+              <button class="btn btn-primary btn-lg custom-btn-login mt-4">Sign in</button>
+            </div>
+          </form>
           <div class="d-flex justify-content-center mt-1">
             <p><a href="#" class="custom-txt-link">Forgot your password?</a></p>
           </div>
@@ -31,9 +36,7 @@
       </div>
     </div>
   </div>
-</form>
-<div class="d-flex justify-content-center mt-4">
-  <div>
-    <p>Not a member yet? <a href="/register" class="custom-txt-link">Register now</a></p>
-  </div>
+
 </div>
+
+

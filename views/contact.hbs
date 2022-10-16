@@ -1,0 +1,46 @@
+{{#each errors}}
+  <div class="alert alert-danger">{{warnings}}</div>
+{{/each}}
+
+<div class="row">
+  <div class="col justify-content-md-center custom-verticalLine">
+    <div class="custom-image">
+      <img src="img/contactUs.webp" alt="me" class="custom-img">
+    </div>
+  </div>
+  <div class="col justify-content-md-center">
+    <div class="d-flex justify-content-center">
+      <div class="card custom-no-border" style="width: 50rem;">
+        <div class="card-body">
+          <div class="d-flex justify-content-center mt-1">
+            <h2 class="custom-font-login">How Can We Help?</h2>
+          </div>
+          <hr>
+          <div class="d-grid gap-2 mx-auto">
+          <form action="/contact" method="POST">
+            <div class="form-floating">
+              <input type="text" class="form-control mt-2" id="floatingInputGrid" name="name">
+              <label for="floatingInputGrid">Your Name</label>
+            </div>
+            <div class="form-floating">
+              <input type="email" class="form-control mt-2" id="floatingInputGrid" name="email">
+              <label for="floatingInputGrid">Your Email address</label>
+            </div>
+            <div class="form-floating">
+              <input type="subject" class="form-control mt-2" id="floatingInputGrid" name="subject">
+              <label for="floatingInputGrid">Subject</label>
+            </div>
+            <div class="form-floating">
+              <textarea class="form-control mt-2" id="floatingInputGrid" name="message" rows="3"></textarea>
+              <label for="floatingInputGrid">Message</label>
+            </div>
+            <div class="d-grid col-6 mx-auto mt-4">
+              <button class="btn btn-primary btn-lg custom-btn-login">Send</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

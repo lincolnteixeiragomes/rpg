@@ -2,19 +2,19 @@
   <div class="alert alert-danger">{{warnings}}</div>
 {{/each}}
 
-<div class="row justify-content-md-center">
-  <div class="custom-image">
-    <img src="img/user-registration.webp" alt="me" class="custom-img">
+<div class="row">
+  <div class="col justify-content-md-center custom-verticalLine">
+    <div class="custom-image">
+      <img src="img/user-registration.webp" alt="image" class="custom-img">
+    </div>
   </div>
-</div>
-<form action="/register" method="POST">
-  <div class="d-flex justify-content-center">
-    <div class="card" style="width: 30rem;">
-      <div class="card-body">
+  <div class="col card custom-no-border">
+    <div class="card-body">
       <div class="d-flex justify-content-center mt-1">
         <h2 class="custom-font-login">Create new account</h2>
       </div>
-        <hr>
+      <hr>
+      <form action="/register" method="POST">
         <div class="d-grid gap-2 mx-auto">
           <div class="form-floating">
             <input type="text" class="form-control" id="floatingInputGrid" name="name">
@@ -29,19 +29,18 @@
             <label for="floatingInputGrid">E-mail:</label>
           </div>
           <div class="form-floating">
-              <input type="password" class="form-control" id="floatingInputPassword" name="password">
-              <label for="floatingInputPassword">Password</label>
+            <input type="password" class="form-control" id="floatingInputPassword" name="password">
+            <label for="floatingInputPassword">Password</label>
           </div>
           <div class="form-floating">
-              <input type="password" class="form-control" id="floatingInputPassword" name="password2">
-              <label for="floatingInputPassword">Repeate Password:</label>
+            <input type="password" class="form-control" id="floatingInputPassword" name="password2">
+            <label for="floatingInputPassword">Repeate Password:</label>
           </div>
           <div class="d-grid col-6 mx-auto">
             <button type="submit" class="btn btn-primary btn-lg custom-btn-register">Register</button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
-</form>
-
+</div>

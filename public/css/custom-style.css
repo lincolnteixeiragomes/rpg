@@ -4,26 +4,26 @@
 }
 
 .custom-image-cropper {
-  width: 300px;
-  height: 300px;
+  max-width:20%;
+  max-height:20%;
   position: relative;
   overflow: hidden;
   border-radius: 50%;
 }
 
 .custom-image {
-  width: 300px;
-  height: 300px;
+  max-width:100%;
+  max-height:100%;
   position: relative;
   overflow: hidden;
 }
 
 .custom-img {
   display: inline;
-  margin: 0 -12px;
-  height: 100%;
-  width: auto;
+  max-width:100%;
+  max-height:100%;
 }
+
 
 .custom-font-login {
   font-family: 'Lobster', cursive;
@@ -44,4 +44,12 @@
 .custom-txt-link {
   text-decoration: none;
   font-size: 16px;
+}
+
+.custom-verticalLine {
+  border-right: 2px solid #ebebebf0;
+}
+
+.custom-no-border{
+  border: none;
 }

@@ -4,6 +4,7 @@ const { Sequelize } = require('../config/db');
 
 const { Op } = Sequelize;
 const User = require('../models/User');
+const mail = require('../config/mail');
 
 // Display page of list Users.
 exports.userList = (req, res) => {
@@ -238,6 +239,13 @@ exports.userRegisterPost = (req, res) => {
             User.create({
               name, nickname, email, hash, role,
             }).then(() => {
+              const emailTo = 'lincolnteixeiragomes@gmail.com';
+              const subject = 'Teste de e-mail';
+              const message = 'Minha message';
+
+              // implement your spam protection or checks.
+              mail.sendMail(name, emailTo, subject, message);
+
               req.flash('success_msg', 'User registered succefully!');
               res.redirect('/');
             }).catch((err3) => {
