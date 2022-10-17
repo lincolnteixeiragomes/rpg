@@ -1,4 +1,4 @@
 // Display home for admin
 exports.indexGet = (req, res) => {
-  res.render('home');
+  res.render('inDevelopment');
 };
