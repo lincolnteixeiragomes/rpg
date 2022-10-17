@@ -3,6 +3,14 @@
   font-family: 'Silkscreen', cursive;
 }
 
+.custom-font-silkscreen{
+  font-family: 'Silkscreen', cursive;
+}
+
+.custom-font-sawarabi{
+  font-family: 'Sawarabi Mincho', serif;
+}
+
 .custom-image-cropper {
   max-width:20%;
   max-height:20%;

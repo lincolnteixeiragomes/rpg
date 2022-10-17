@@ -264,3 +264,84 @@ exports.userRegisterPost = (req, res) => {
     });
   }
 };
+
+// Display user reset password form on GET
+exports.userResetPasswordGet = (req, res) => {
+  res.render('passwordReset');
+};
+
+// Handle user account to send reset link
+exports.userResetPasswordPost = (req, res) => {
+  const { email } = req.body;
+
+  User.findOne({ where: { email } }).then((user) => {
+    if (user) {
+      const linkPasswordRecovery = `192.168.18.182:5000/resetpwd?uid=${user.id}&hash=${user.hash}`;
+      console.log(linkPasswordRecovery);
+      const emailTo = email;
+      const subject = 'Password Reset - RPG';
+      const message = `To reset your password click on link -> http://${linkPasswordRecovery}`;
+
+      // implement your spam protection or checks.
+      mail.sendMail(user.name, emailTo, subject, message);
+
+      res.render('resetPasswordSent');
+    } else {
+      const errors = [];
+      errors.push({ warnings: 'Sorry! e-mail not found in our database.' });
+      res.render('passwordReset', { errors, email });
+    }
+  });
+};
+
+exports.userPasswordChangeGet = (req, res) => {
+  const { uid, hash } = req.query;
+  const id = uid;
+
+  if (hash && id) {
+    User.findOne({
+      where:
+        { [Op.and]: [{ id }, { hash }] },
+    }).then((user) => {
+      if (user) res.render('passwordChange', { hash, id });
+      if (!user) res.render('userNotFound');
+    });
+  } else {
+    res.render('dangerousTry');
+  }
+};
+
+exports.userPasswordChangePost = (req, res) => {
+  const {
+    id, secret, password, password2,
+  } = req.body;
+
+  const errors = [];
+  if (password !== password2) errors.push({ warnings: 'Password not match' });
+  if (errors.length > 0) {
+    res.render('passwordChange', { errors, hash: secret, id });
+  } else if (secret && id) {
+    User.findOne({ where: { [Op.and]: [{ id }, { hash: secret }] } }).then((user) => {
+      bcrypt.genSalt(10, (err, salt) => {
+        if (err) {
+          req.flash('error_msg', `Something goes wrong ${err.message}`);
+          res.redirect('/');
+        }
+        bcrypt.hash(password, salt, (err2, hash) => {
+          if (err2) {
+            req.flash('error_msg', `Something goes wrong ${err2.message}`);
+            res.redirect('/');
+          }
+          const newUser = user;
+          newUser.hash = hash;
+          newUser.save().then(() => {
+            req.flash('success_msg', 'Password updated successfully!');
+            res.redirect('/login');
+          });
+        });
+      });
+    });
+  } else {
+    res.render('dangerousTry');
+  }
+};
