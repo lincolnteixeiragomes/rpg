@@ -1,3 +1,4 @@
+require('dotenv/config');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const { Sequelize } = require('../config/db');
@@ -239,9 +240,9 @@ exports.userRegisterPost = (req, res) => {
             User.create({
               name, nickname, email, hash, role,
             }).then(() => {
-              const emailTo = 'lincolnteixeiragomes@gmail.com';
-              const subject = 'Teste de e-mail';
-              const message = 'Minha message';
+              const emailTo = email;
+              const subject = 'Bem vindo - The Project RPG';
+              const message = 'Valide o seu e-mail clicando no link -> "Ainda não implementei"';
 
               // implement your spam protection or checks.
               mail.sendMail(name, emailTo, subject, message);
@@ -276,11 +277,13 @@ exports.userResetPasswordPost = (req, res) => {
 
   User.findOne({ where: { email } }).then((user) => {
     if (user) {
-      const linkPasswordRecovery = `192.168.18.182:5000/resetpwd?uid=${user.id}&hash=${user.hash}`;
+      const baseUrl = process.env.BASE_URL;
+      console.log(baseUrl);
+      const linkPasswordRecovery = `${baseUrl}/resetpwd?uid=${user.id}&hash=${user.hash}`;
       console.log(linkPasswordRecovery);
       const emailTo = email;
       const subject = 'Password Reset - RPG';
-      const message = `To reset your password click on link -> http://${linkPasswordRecovery}`;
+      const message = `To reset your password click on link -> ${linkPasswordRecovery}`;
 
       // implement your spam protection or checks.
       mail.sendMail(user.name, emailTo, subject, message);
