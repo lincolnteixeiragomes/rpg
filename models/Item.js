@@ -13,7 +13,7 @@ const Item = db.define('item', {
     type: Sequelize.INTEGER,
   },
   rarityId: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
   },
 });
 
