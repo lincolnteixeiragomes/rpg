@@ -28,6 +28,10 @@ const User = db.define('user', {
     type: Sequelize.DATE,
     allowNull: true,
   },
+  isEmailActive: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 // Create table

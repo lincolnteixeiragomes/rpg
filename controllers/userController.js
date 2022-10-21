@@ -241,13 +241,15 @@ exports.userRegisterPost = (req, res) => {
               name, nickname, email, hash, role,
             }).then(() => {
               const emailTo = email;
-              const subject = 'Bem vindo - The Project RPG';
-              const message = 'Valide o seu e-mail clicando no link -> "Ainda não implementei"';
+              const subject = '[Validar E-mail] - Bem vindo - The Project RPG';
+              const baseUrl = process.env.BASE_URL;
+              const linkCheckEmail = `${baseUrl}/checkEmail?email=${email}&hash=${hash}`;
+              const message = `Valide o seu e-mail clicando no link -> ${linkCheckEmail}`;
 
               // implement your spam protection or checks.
               mail.sendMail(name, emailTo, subject, message);
 
-              req.flash('success_msg', 'User registered succefully!');
+              req.flash('success_msg', 'Check your mail box to valid your e-mail.');
               res.redirect('/');
             }).catch((err3) => {
               req.flash('error_msg', `Something goes wrong, try again!.${err3.message}`);
@@ -278,9 +280,7 @@ exports.userResetPasswordPost = (req, res) => {
   User.findOne({ where: { email } }).then((user) => {
     if (user) {
       const baseUrl = process.env.BASE_URL;
-      console.log(baseUrl);
       const linkPasswordRecovery = `${baseUrl}/resetpwd?uid=${user.id}&hash=${user.hash}`;
-      console.log(linkPasswordRecovery);
       const emailTo = email;
       const subject = 'Password Reset - RPG';
       const message = `To reset your password click on link -> ${linkPasswordRecovery}`;
@@ -347,4 +347,31 @@ exports.userPasswordChangePost = (req, res) => {
   } else {
     res.render('dangerousTry');
   }
+};
+
+exports.userEmailConfirmation = (req, res) => {
+  const { email, hash } = req.query;
+  if (hash && email) {
+    User.findOne({
+      where:
+        { [Op.and]: [{ email }, { hash }] },
+    }).then((user) => {
+      if (user) {
+        const newUser = user;
+        newUser.isEmailActive = true;
+        newUser.save().then(() => {
+          req.flash('success_msg', 'E-mail validated successfully.');
+          res.redirect('/login');
+        });
+      } else {
+        res.render('userNotFound');
+      }
+    });
+  } else {
+    res.render('dangerousTry');
+  }
+};
+
+exports.userEmailPleaseCheck = (req, res) => {
+  res.render('emailValidated');
 };

@@ -20,5 +20,7 @@ router.get('/register', userController.userRegisterGet);
 router.post('/register', userController.userRegisterPost);
 router.get('/contact', contactController.contactGet);
 router.post('/contact', contactController.contactPost);
+router.get('/checkEmail', userController.userEmailConfirmation);
+router.get('/confirmEmail', userController.userEmailPleaseCheck);
 
 module.exports = router;
